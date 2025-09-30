@@ -4,23 +4,26 @@ import { Image } from "astro:assets";
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/*.{jpeg,jpg,png,gif}"
 );
----
+
+const heroImageModule = await images["/src/assets/hero-removebg-preview.png"]();
+const heroImage = heroImageModule.default;
+---   
 
 <section class="py-20 flex md:flex-row flex-col px-4 md:px-0 gap-10 md:gap-0">
   <div class="flex flex-col gap-6 justify-start items-start md:w-1/2">
-    <h1 class="text-pblack">Hi, my name is Joaquín Sorolla</h1>
-    <p class="text-6xl font-bold">Duels with the sun are fewer.</p>
+    <h1 class="text-pblack">Hi, my name is Jason Sebastian.</h1>
+    <p class="text-6xl font-bold">Giving structure to a daydream.</p>
     <p>
-      I am Joaquín Sorolla y Bastida, a Spanish painter. A prolific artist, I
-      left behind more than 2,200 cataloged works.
+      I'm a web designer and professional daydreamer.
+      I specialize in exploring wild ideas and then focusing them into beautiful, 
+      intuitive designs that perfectly capture a client's vision.
+      My goal is to meet your requirements; my passion is to make the result even better than you imagined.
     </p>
     <a
-      rel="noopener noreferrer"
-      href="https://jramma.com"
-      target="_blank"
+      href="/#socials"
       class="bg-pgreen px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition"
     >
-      Work together
+      Let's work together!
     </a>
   </div>
   <div
@@ -28,7 +31,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   >
     <a
       rel="noopener noreferrer"
-      href="https://es.wikipedia.org/wiki/Joaqu%C3%ADn_Sorolla"
+      href="https://www.linkedin.com/in/jason-sebastian88/"
       target="_blank"
     >
       <div
@@ -48,12 +51,12 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
           class="absolute text-nowrap flex items-center gap-4 -bottom-12 right-0 pr-4 bg-pgreen pl-1 z-10 shadow-card1 group-hover:shadow-card transition rounded-full border-3 border-black"
         >
           <Icon name="beach" />
-          <p>Joaquín Sorolla</p>
+          <p>Jason Sebastian</p>
         </div>
         <div class="h-80 w-60 overflow-hidden relative -mt-30 rounded-2xl">
           <Image
             class="object-bottom absolute bottom-0 group-hover:scale-105 transition"
-            src={images["/src/assets/hero.png"]()}
+            src={heroImage}
             alt="Sorolla, photo wiki"
           />
         </div>

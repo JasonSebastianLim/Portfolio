@@ -1,0 +1,195 @@
+---
+// src/components/Projects.astro
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+// --- For the Featured Projects (This part remains the same) ---
+import projectOneImage from "@/assets/IDPlay-port.jpeg";
+import projectTwoImage from "@/assets/studium-port.jpeg";
+
+// --- Project data remains the same ---
+const otherProjects = [
+  {
+    icon: 'devicon:java',
+    title: 'Simple Social Media App',
+    description: '<p>A simple GUI made with Java and runned with Xampp.</p>',
+    links: [
+      { href: 'https://github.com/JasonSebastianLim/SocialMediaApp/tree/master/main/SocialMediaApp', icon: 'tabler:brand-github', label: 'GitHub' },
+    ]
+  },
+  {
+    icon: 'tabler:brand-figma',
+    title: 'TUMBAS',
+    description: '<p>TUMBAS combats stunting by providing accessible health information and expert consultations." </p>',
+    links: [
+      { href: '#', icon: 'tabler:brand-figma', label: 'Figma Case Study' },
+      { href: 'https://www.canva.com/design/DAGF1i_j5zo/Iw2vbr2GzYDXpOt-P13Xaw/edit?utm_content=DAGF1i_j5zo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton', icon: 'tabler:external-link', label: 'Live Site' }
+    ]
+  },
+  {
+    icon: 'tabler:brand-astro',
+    title: 'Personal Portfolio',
+    description: '<p>A lightning-fast personal site built with Astro, Tailwind CSS, and a little bit of GSAP.</p>',
+    links: [
+      { href: '#', icon: 'tabler:brand-github', label: 'GitHub' }
+    ]
+  },
+  {
+    icon: 'tabler:brand-nextjs',
+    title: 'Perpustakaan',
+    description: '<p>Library database CRUD with MongoDB. Build with complete mapped Entity Relationship Diagram.</p>',
+    links: [
+      { href: 'https://docs.google.com/document/d/1ixqau-BE0UX0_OkB_IzxhlVErJ1_Mz8X/edit', icon: 'tabler:external-link', label: 'Live Demo' }
+    ]
+  },
+  {
+    icon: 'tabler:brand-python',
+    title: 'BinusMaya Sentiment Analysis',
+    description: '<p>A Python script that scrapes Google Playstore apps, specifically analyzing on the sentiment of the comments in BinusMaya App.</p>',
+    links: [
+      { href: 'https://github.com/JasonSebastianLim/Sentiment-Analysis-BinusMaya', icon: 'tabler:brand-github', label: 'GitHub' }
+    ]
+  },
+  {
+    icon: 'tabler:layout-dashboard',
+    title: 'Tableau Project',
+    description: '<p>An analytical project of building insights from using Tableau using "supermarket" excel data.</p>',
+    links: [
+      { href: 'https://docs.google.com/document/d/1uYY--x6tAyujqO3Oj2H3IN4VYbWsTgpv9TKZOQyoU50/edit?usp=sharing', icon: 'tabler:external-link', label: 'Live Site' }
+    ]
+  }
+];
+
+const projectsToShowInitially = 3;
+
+const bgClasses = [ "bg-pgreen", "bg-pblue", "bg-ppink", "bg-pyellow" ];
+const getRandomClass = () => bgClasses[Math.floor(Math.random() * bgClasses.length)];
+---
+
+<section id="projects" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="mb-16">
+    <p class="text-pblack font-mono text-lg">My Gallery</p>
+    <h2 class="text-4xl font-bold">A Curated Collection</h2>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-10 md:gap-16 items-center mb-24 group">
+    <div class="md:w-7/12 p-4 md:p-6 bg-gradient-to-br from-[#c89e4c] via-[#f7e6a7] to-[#ffeeb0] border-2 border-[#a57c30] rounded-xl shadow-card hover:shadow-hover-gold transition-shadow duration-300 ease-in-out [box-shadow:8px_8px_#000,inset_0_0_15px_rgba(0,0,0,0.5)] md:aspect-[4/3] w-full flex items-center justify-center overflow-hidden">
+        <a href="https://idplay-josesdio30s-projects.vercel.app/" target="_blank" rel="noopener noreferrer" class="block w-full h-full">
+            <Image src={projectOneImage} alt="Screenshot of IDPlay Website" class="rounded-md w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]" />
+        </a>
+    </div>
+    <div class="md:w-5/12 self-start md:mt-8">
+        <div class="bg-[#F8F8F4] p-6 rounded-xl border-3 border-black shadow-card hover:shadow-hover-gesso transition-shadow duration-300 ease-in-out relative">
+            <p class="text-pyellow font-bold text-lg mb-1">Featured Work</p>
+            <h3 class="text-3xl font-bold mb-3 text-pblack">IDPlay's Website</h3>
+            <p class="mb-4 text-pblack/80 text-lg leading-relaxed">As the UI/UX Designer for IDPlay, an internet service provider, I was tasked with designing their primary customer-facing website. Using Figma, I designed a comprehensive user experience across more than 13 pages...</p>
+            <div class="flex flex-wrap gap-2 mb-5">
+                <span class="bg-gray-200/70 text-pblack px-3 py-1 rounded-full text-sm font-medium">Figma</span>
+                <span class="bg-gray-200/70 text-pblack px-3 py-1 rounded-full text-sm font-medium">UI/UX</span>
+            </div>
+            <div class="flex gap-4 text-3xl text-pblack">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-pblue transition-colors duration-300"><Icon name="tabler:brand-github" /></a>
+                <a href="https://idplay-josesdio30s-projects.vercel.app/" target="_blank" rel="noopener noreferrer" class="hover:text-pblue transition-colors duration-300"><Icon name="tabler:external-link" /></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="flex flex-col md:flex-row-reverse gap-10 md:gap-16 items-center mb-24 group">
+    <div class="md:w-7/12 p-4 md:p-6 bg-gradient-to-br from-[#c89e4c] via-[#f7e6a7] to-[#ffeeb0] border-2 border-[#a57c30] rounded-xl shadow-card hover:shadow-hover-gold transition-shadow duration-300 ease-in-out [box-shadow:8px_8px_#000,inset_0_0_15px_rgba(0,0,0,0.5)] md:aspect-[4/3] w-full flex items-center justify-center overflow-hidden">
+        <a href="https://docs.google.com/document/d/1qIIgT43VNkUqruPlh4W621m6x8jNZF9Iex-5SorZqM4/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="block w-full h-full">
+            <Image src={projectTwoImage} alt="Screenshot of Studium Project" class="rounded-md w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]" />
+        </a>
+    </div>
+    <div class="md:w-5/12 self-start md:mt-8">
+        <div class="bg-[#F8F8F4] p-6 rounded-xl border-3 border-black shadow-card hover:shadow-hover-gesso transition-shadow duration-300 ease-in-out relative">
+            <p class="text-ppink font-bold text-lg mb-1">Featured Project</p>
+            <h3 class="text-3xl font-bold mb-3 text-pblack">Studium</h3>
+            <p class="mb-4 text-pblack/80 text-lg leading-relaxed">Studium is a web application designed to create a serene and productive digital environment for studying and focus work. Developed with the Next.js framework, it combines the popular Pomodoro Technique with a customizable audio-visual experience to help users minimize distractions and enhance concentration. </p>
+            <div class="flex flex-wrap gap-2 mb-5">
+                <span class="bg-gray-200/70 text-pblack px-3 py-1 rounded-full text-sm font-medium">React</span>
+                <span class="bg-gray-200/70 text-pblack px-3 py-1 rounded-full text-sm font-medium">Figma</span>
+                <span class="bg-gray-200/70 text-pblack px-3 py-1 rounded-full text-sm font-medium">Next.js</span>
+                <span class="bg-gray-200/70 text-pblack px-3 py-1 rounded-full text-sm font-medium">Xampp</span>
+            </div>
+            <div class="flex gap-4 text-3xl text-pblack">
+                <a href="https://github.com/JasonSebastianLim/studium" target="_blank" rel="noopener noreferrer" class="hover:text-pblue transition-colors duration-300"><Icon name="tabler:brand-github" /></a>
+                <a href="https://docs.google.com/document/d/1qIIgT43VNkUqruPlh4W621m6x8jNZF9Iex-5SorZqM4/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="hover:text-pblue transition-colors duration-300"><Icon name="tabler:external-link" /></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <section class="flex flex-col text-center gap-4 pt-20" >
+    <h2 class="text-4xl font-bold">Other Noteworthy Projects</h2>
+    <p class="text-pblack">A few more for the collection...</p>
+    
+    <ul class="flex flex-wrap justify-center gap-8 py-16">
+      {otherProjects.map((project, index) => {
+        const randomClass = getRandomClass();
+        const isHidden = index >= projectsToShowInitially;
+        return (
+          // FIX 1: Removed initial `shadow-card`. Shadow is now hover-only.
+          <li class={`w-80 text-left rounded-2xl border-3 border-black group hover:shadow-hover transition-all duration-300 p-6 flex flex-col justify-between bg-white/50 ${isHidden ? 'hidden more-project' : ''}`}>
+            <header class="flex justify-between items-start mb-4">
+              
+              {/* FIX 2: Removed fixed width/height. Size is now natural. `items-start` on parent ensures it's not clipped vertically. */}
+              <div class={`${randomClass} text-4xl p-2 border-1 border-black shadow-card1 rounded-full`}>
+                <Icon name={project.icon} />
+              </div>
+              
+              <div class="flex items-center gap-4 text-2xl text-pblack">
+                {project.links.map(link => (
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" class="hover:text-pblue transition" aria-label={link.label}>
+                    <Icon name={link.icon} />
+                  </a>
+                ))}
+              </div>
+            </header>
+            <main>
+              <h3 class="text-2xl font-bold text-pblack mb-2">{project.title}</h3>
+              <div class="text-pblack/80" set:html={project.description} />
+            </main>
+          </li>
+        );
+      })}
+    </ul>
+
+    {/* Load More Button */}
+    {otherProjects.length > projectsToShowInitially && (
+      <div class="text-center">
+        <button id="load-more-btn" class="bg-pblue text-lg py-3 px-8 rounded-lg border-3 border-black shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1">
+          Load More
+        </button>
+      </div>
+    )}
+  </section>
+</section>
+
+<style is:global>
+  .shadow-card { box-shadow: 4px 4px #000; }
+  .shadow-card1 { box-shadow: 2px 2px #000; } /* Smaller shadow for icon circles */
+
+  .hover\:shadow-hover-gold:hover { box-shadow: 10px 10px #000, inset 0 0 20px rgba(0,0,0,0.6); }
+  .hover\:shadow-hover-gesso:hover { box-shadow: 8px 8px #000; }
+  
+  /* FIX 3: Defines the hover effect for the entire card */
+  .hover\:shadow-hover:hover {
+    box-shadow: 8px 8px #000;
+    transform: translate(-4px, -4px); /* This creates the "lift" effect */
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (!loadMoreBtn) return;
+
+    loadMoreBtn.addEventListener('click', () => {
+      const hiddenProjects = document.querySelectorAll('.more-project');
+      hiddenProjects.forEach(project => {
+        project.classList.remove('hidden');
+      });
+      loadMoreBtn.style.display = 'none'; 
+    });
+  });
+</script>

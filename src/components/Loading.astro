@@ -1,0 +1,138 @@
+---
+// src/components/Preloader.astro - REVISED with a more standard 'J'
+---
+
+<div id="preloader" class="preloader">
+  <div class="logo-container">
+    <svg
+      id="j-logo"
+      width="150"
+      height="200"
+      viewBox="0 0 150 200"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        class="j-stroke"
+        d="M 75,20 L 75,150 C 75,180 50,180 50,150"
+        stroke="#2E3A48"
+        fill="none"
+        stroke-width="12"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+
+      <path
+        class="j-stroke"
+        d="M 50,20 L 100,20"
+        stroke="#2E3A48"
+        fill="none"
+        stroke-width="12"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+    <p id="preloader-name">Welcome to Jason Sebastian's Portfolio</p>
+  </div>
+</div>
+
+<style>
+  .preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Gesso canvas background color */
+    background: #F8F8F4;
+  }
+
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Initially hide the SVG and the name */
+  #j-logo,
+  #preloader-name {
+    opacity: 0;
+  }
+
+  /* Style for the name text */
+  #preloader-name {
+    font-family: 'Alenxandria', monospace;
+    font-size: 2rem;
+    color: #2E3A48;
+    margin-top: 1.5rem;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  /* Ensure SVG paths are ready for drawing animation */
+  #j-logo .j-stroke {
+    opacity: 1; /* Make sure strokes are visible when drawn */
+  }
+</style>
+
+
+<script>
+  import { gsap } from "gsap";
+
+  function runGradualRevealAnimation() {
+    const tl = gsap.timeline();
+    
+    // 1. SETUP
+    gsap.set("body", { overflow: "hidden" });
+    gsap.set("#j-logo", { opacity: 1 });
+    const allPaths = document.querySelectorAll<SVGPathElement>("#j-logo .j-stroke");
+    allPaths.forEach((path) => {
+      const length = path.getTotalLength();
+      path.style.strokeDasharray = `${length}`;
+      path.style.strokeDashoffset = `${length}`;
+    });
+    // 2. DRAW STROKES
+    tl.to(allPaths, { strokeDashoffset: 0, duration: 1.0, ease: "power2.out", stagger: 0.4 });
+    // 3. GLOW
+    tl.to("#j-logo", { filter: "drop-shadow(0 0 20px rgba(255, 255, 220, 0.8))", duration: 0.6, ease: "power1.inOut" }, "-=0.3");
+    // 4. NAME APPEARS
+    tl.to("#preloader-name", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.4");
+    // SEND SIGNAL
+    tl.call(() => { window.dispatchEvent(new CustomEvent('preloaderDone')); });
+    // 5. FADE OUT PRELOADER
+    tl.to("#preloader", { opacity: 0, duration: 0.8, ease: "power2.in", delay: 0.1 });
+    // 6. CLEAN UP
+    tl.call(() => {
+      document.getElementById('preloader')?.remove();
+      document.body.style.overflow = 'auto';
+    });
+
+    // Start the animation
+    console.log("▶️ Starting the preloader animation now.");
+    tl.play();
+  }
+
+  async function initializePreloader() {
+    console.log("⏳ Initializing preloader script...");
+    try {
+      console.log("🤔 Waiting for fonts to be ready...");
+      
+      // Wait until all fonts defined in your CSS are loaded
+      await document.fonts.ready;
+
+      // Log success and run the animation
+      console.log("✅ Fonts are ready! Firing animation.");
+      runGradualRevealAnimation();
+
+    } catch (error) {
+      // Log the error if fonts fail
+      console.error("❌ Font loading failed:", error);
+      runGradualRevealAnimation();
+    }
+  }
+
+  // Start the process
+  initializePreloader();
+</script>

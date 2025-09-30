@@ -1,0 +1,78 @@
+---
+// src/components/AboutMe.astro
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import myProfilePic from "@/assets/MyProfile.png"
+---
+
+<section id="about" class="py-20 px-4">
+  <div class="text-center mb-12">
+    <h2 class="text-4xl font-bold">About the daydreamer.</h2>
+    <p class="text-pblack mt-2">A little bit more about me.</p>
+  </div>
+
+  {/* Main container for the mind map */}
+  <div class="relative flex flex-col md:flex-row flex-wrap justify-center items-center gap-12 md:min-h-[600px]">
+
+    <svg class="hidden md:block absolute top-0 left-0 w-full h-full z-0" aria-hidden="true">
+      <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="#4E6273" stroke-width="2" stroke-dasharray="5,5" />
+      <line x1="50%" y1="50%" x2="75%" y2="25%" stroke="#4E6273" stroke-width="2" stroke-dasharray="5,5" />
+      <line x1="50%" y1="50%" x2="25%" y2="85%" stroke="#4E6273" stroke-width="2" stroke-dasharray="5,5" />
+      <line x1="50%" y1="50%" x2="75%" y2="85%" stroke="#4E6273" stroke-width="2" stroke-dasharray="5,5" />
+    </svg>
+
+       <div class="relative z-10 w-64 h-64 bg-pblue border-3 border-black rounded-full shadow-card flex justify-center items-center transition-all duration-300 hover:shadow-hover hover:-translate-y-2">
+      <a href="#" target="_blank" rel="noopener noreferrer" class="w-full h-full block">
+        <Image 
+          src={myProfilePic} 
+          alt="A photo of Jason Sebastian"
+          class="rounded-full w-full h-full object-cover" 
+        />
+      </a>
+    </div>
+
+    <div class="relative z-10 w-72 p-6 bg-pgreen border-3 border-black rounded-xl shadow-card md:absolute md:top-0 md:left-[15%] transition-all duration-300 hover:shadow-hover hover:-translate-y-2">
+      <h3 class="text-2xl font-bold flex items-center gap-2">
+        <Icon name="tabler:code" class="w-7 h-7" />
+        My Skills
+      </h3>
+      <ul class="list-disc list-inside mt-2">
+        <li>HTML, CSS, JavaScript</li>
+        <li>Astro, React, Next.js</li>
+        <li>Tailwind CSS, GSAP</li>
+        <li>Figma</li>
+      </ul>
+    </div>
+    
+    <div class="relative z-10 w-72 p-6 bg-ppink border-3 border-black rounded-xl shadow-card md:absolute md:top-0 md:right-[15%] transition-all duration-300 hover:shadow-hover hover:-translate-y-2">
+      <h3 class="text-2xl font-bold flex items-center gap-2">
+        <Icon name="tabler:bulb" class="w-7 h-7" />
+        My Philosophy
+      </h3>
+      <p class="mt-2">
+        Clean design is the canvas, and intuitive user experience is the masterpiece painted on it.
+      </p>
+    </div>
+
+    <div class="relative z-10 w-72 p-6 bg-pblue border-3 border-black rounded-xl shadow-card md:absolute md:bottom-0 md:left-[15%] transition-all duration-300 hover:shadow-hover hover:-translate-y-2">
+      <h3 class="text-2xl font-bold flex items-center gap-2">
+        <Icon name="heroicons:academic-cap" class="w-7 h-7" />
+        Right Now
+      </h3>
+      <p class="mt-2">
+        Currently studying Business Analytics at BINUS University, deepening my knowledge in web technologies and design principles.
+      </p>
+    </div>
+
+    <div class="relative z-10 w-72 p-6 bg-pyellow border-3 border-black rounded-xl shadow-card md:absolute md:bottom-0 md:right-[15%] transition-all duration-300 hover:shadow-hover hover:-translate-y-2">
+      <h3 class="text-2xl font-bold flex items-center gap-2">
+        <Icon name="game-icons:eight-ball" class="w-7 h-7" />
+        For Fun
+      </h3>
+      <p class="mt-2">
+        When I'm not designing, you can find me swimming laps or planning my next shot in a game of pool.
+      </p>
+    </div>
+
+  </div>
+</section>

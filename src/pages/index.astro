@@ -4,20 +4,62 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import Hero from "@/components/Hero.astro";
-import WhatIDo from "@/components/WhatIDo.astro";
+import Projects from "@/components/Projects.astro"; 
+import Loading from "@/components/Loading.astro";
+import Certificates from '@/components/Certificates.astro';
+import AboutMe from "@/components/AboutMe.astro"; 
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    
+    <style is:inline>
+      #site-content {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+      }
+      #site-content.loaded {
+        opacity: 1;
+      }
+    </style>
   </head>
   <body class="p-0 m-0 max-w-screen">
-    <Header />
-    <main class="container mx-auto md:px-10">
+
+    <Loading />
+
+    <div id="site-content">
+      <Header />
+      <main class="container mx-auto md:px-10">
       <Hero />
-      <WhatIDo />
+      
+      {/* ADD SECTION TAGS WITH IDs */}
+      <section id="about-me">
+        <AboutMe /> 
+      </section>
+      <section id="projects">
+        <Projects />
+      </section>
+      <section id="certificates">
+        <Certificates />
+      </section>
+      
     </main>
-    <Footer />
+    <section id="socials" >
+      <Footer />
+    </section>
+      
+    </div>
+
+    <script is:inline>
+      window.addEventListener('preloaderDone', function() {
+        const content = document.getElementById('site-content');
+        if (content) {
+          content.classList.add('loaded');
+        }
+      });
+    </script>
+
   </body>
 </html>

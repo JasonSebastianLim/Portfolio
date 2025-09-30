@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @font-face {
     font-family: 'Alexandria';
     src: url('/fonts/Alexandria-Black.woff2') format('woff2'),
@@ -85,4 +86,7 @@
 body {
     font-family: 'Alexandria', sans-serif;
     background-color: #f2f2f2;
+}
+html {
+  scroll-behavior: smooth;
 }
