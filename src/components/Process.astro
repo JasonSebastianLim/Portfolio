@@ -1,0 +1,116 @@
+---
+// src/components/Process.astro
+import { Icon } from "astro-icon/components";
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap" rel="stylesheet">
+
+<section id="process" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sketchbook-bg">
+  <div class="text-center mb-16">
+    <h2 class="text-4xl font-bold">From Daydream to Deployed</h2>
+    <p class="text-pblack mt-2">My structured process for turning wild ideas into reality.</p>
+  </div>
+
+  <div class="flex flex-col md:flex-row md:gap-16 relative">
+    
+    <div class="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 h-full w-px bg-pblack/20"></div>
+
+    <div class="md:w-1/2 space-y-12 md:space-y-16 md:pr-12">
+      
+      <div class="relative sketch-note transform -rotate-1">
+        <h3 class="text-2xl font-bold flex items-center gap-2 mb-3">
+          <Icon name="tabler:bulb" class="w-7 h-7 text-pblue" />
+          <span class="step-title">01. Discovery</span>
+        </h3>
+        <p class="text-pblack/80">
+          It all starts with a conversation. We'll dive deep into your vision, goals, and audience to understand the 'why' behind the project.
+        </p>
+      </div>
+
+      <div class="relative sketch-note transform rotate-1 md:ml-8">
+        <h3 class="text-2xl font-bold flex items-center gap-2 mb-3">
+          <Icon name="tabler:brand-figma" class="w-7 h-7 text-ppink" />
+          <span class="step-title">02. Design</span>
+        </h3>
+        <p class="text-pblack/80">
+          This is where the daydream gets its structure. I create wireframes and high-fidelity mockups in Figma, mapping out the entire user experience.
+        </p>
+      </div>
+      
+    </div>
+
+    <div class="md:w-1/2 space-y-12 md:space-y-16 md:pl-12 mt-12 md:mt-24"> 
+
+      <div class="relative sketch-note transform -rotate-1">
+        <h3 class="text-2xl font-bold flex items-center gap-2 mb-3">
+          <Icon name="tabler:code" class="w-7 h-7 text-pgreen" />
+          <span class="step-title">03. Develop</span>
+        </h3>
+        <p class="text-pblack/80">
+          I bring the designs to life with clean, modern code. I focus on building a fast, responsive, and accessible site that works perfectly on all devices.
+        </p>
+      </div>
+
+      <div class="relative sketch-note transform rotate-1 md:ml-8">
+        <h3 class="text-2xl font-bold flex items-center gap-2 mb-3">
+          <Icon name="tabler:rocket" class="w-7 h-7 text-pyellow" />
+          <span class="step-title">04. Deploy</span>
+        </h3>
+        <p class="text-pblack/80">
+          The final reveal. I handle the launch process to ensure your project is live, optimized, and ready for your audience to enjoy.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .sketchbook-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-color: #F8F8F4; 
+  }
+
+  .sketch-note {
+    @apply relative bg-[#F8F8F4] p-6 rounded-lg border-2 border-dashed border-pblack/30 shadow-sm;
+    transition: transform 0.3s ease;
+  }
+  .sketch-note:hover {
+    transform: rotate(0deg) scale(1.03); 
+  }
+
+  .sketch-note::before {
+    content: '';
+    @apply absolute -top-1 left-2 w-8 h-4 bg-yellow-200/30 border rotate-90 border-black/10; 
+    mix-blend-mode: multiply; 
+  }
+  .sketch-note::after {
+    content: '';
+    @apply absolute -bottom-1 right-2 w-8 h-4 bg-yellow-200/30 border -rotate-45 border-black/10; 
+    mix-blend-mode: multiply;
+  }
+
+  .step-title { 
+     font-family: 'Kalam', cursive; 
+     color: #4E6273; 
+     position: relative; 
+     display: inline-block; 
+     padding-bottom: 4px; 
+  }
+
+  .step-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6'%3E%3Cpath d='M0 3 Q 25 6, 50 3 T 100 3' stroke='%234E6273' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 20px 3px; 
+    opacity: 0.6; 
+  }
+
+</style>

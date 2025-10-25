@@ -1,19 +1,27 @@
 ---
-// src/components/Certificates.astro
 
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
-// Make sure to place your certificate image files in `src/assets/certificates/`
-import certJava from '@/assets/back-end-cert.jpeg'; // Replace with your actual path
-import certNextjs from '@/assets/dart-cert.jpeg'; // Replace with your actual path
-import certFigma from '@/assets/AI-cert.jpeg'; // Replace with your actual path
-import certPython from '@/assets/AWS-cert.jpeg'; // Replace with your actual path
-import certAstro from '@/assets/javascript-cert.jpeg'; // Replace with your actual path
-import certDataAnalysis from '@/assets/SQL-cert.jpeg'; 
+ import certJava from '@/assets/back-end-cert.jpeg'; 
+
+import certNextjs from '@/assets/dart-cert.jpeg'; 
+
+import certFigma from '@/assets/AI-cert.jpeg'; 
+
+import certPython from '@/assets/AWS-cert.jpeg'; 
+
+import certAstro from '@/assets/javascript-cert.jpeg'; 
+
+import certDataAnalysis from '@/assets/SQL-cert.jpeg';
+
 import certProjectManagement from '@/assets/pm-cert.jpeg';
+
 import certCloudComputing from '@/assets/web-cert.jpeg';
+
 import certFrontendDev from '@/assets/ds-cert.jpeg';
+
+
 
 interface Certificate {
     id: string;
@@ -24,81 +32,93 @@ interface Certificate {
     verifyLink: string;
 }
 
-// --- DEFINE YOUR CERTIFICATES HERE ---
-export const certificates: Certificate[] = [
+ export const certificates: Certificate[] = [
+
     {
         id: 'BACK-END-DEVELOPMENT-FOUNDATIONS',
         title: 'Back-End Development Foundations with Javascript',
         issuer: 'Dicoding Indonesia',
         date: 'Juni 2024',
         image: certJava,
-        verifyLink: 'https://www.dicoding.com/certificates/4EXG3K9MQZRL' // IMPORTANT: Replace
+        verifyLink: 'https://www.dicoding.com/certificates/4EXG3K9MQZRL' 
     },
+
     {
         id: 'Dart fundamentals',
         title: 'Dart Fundamentals',
         issuer: 'Dicoding Indonesia',
         date: 'December 2023',
         image: certNextjs,
-        verifyLink: 'https://www.dicoding.com/certificates/KEXL28GVWZG2' // IMPORTANT: Replace
+        verifyLink: 'https://www.dicoding.com/certificates/KEXL28GVWZG2' 
     },
+
     {
         id: 'AI Fundamentls',
         title: 'AI Fundamentals',
         issuer: 'Dicoding Indonesia',
         date: 'Desember 2024',
         image: certFigma,
-        verifyLink: 'https://www.dicoding.com/certificates/81P25VG6YPOY' // IMPORTANT: Replace
+        verifyLink: 'https://www.dicoding.com/certificates/81P25VG6YPOY' 
     },
+
     {
         id: 'Cloud & Gen AI with AWS',
         title: 'Cloud & Generative AI with AWS',
         issuer: 'Dicoding Indonesia',
         date: 'June 2024',
         image: certPython,
-        verifyLink: 'https://www.dicoding.com/certificates/0LZ052GKNX65' // IMPORTANT: Replace
+        verifyLink: 'https://www.dicoding.com/certificates/0LZ052GKNX65' 
     },
+
     {
         id: 'Javascript Fundamentals',
         title: 'Javascript Fundamentals',
         issuer: 'Dicoding Indonesia',
         date: 'June 2024',
         image: certAstro,
-        verifyLink: 'https://www.dicoding.com/certificates/4EXG3K9MQZRL' // IMPORTANT: Replace
+        verifyLink: 'https://www.dicoding.com/certificates/4EXG3K9MQZRL' 
     },
+
     {
         id: 'SQL-Fundamentals',
         title: 'SQL Fundamentals',
         issuer: 'Dicoding Indonesia',
         date: 'September 2023',
         image: certDataAnalysis,
-        verifyLink: 'https://www.dicoding.com/certificates/0LZ052GKNX65' // IMPORTANT: Replace
+        verifyLink: 'https://www.dicoding.com/certificates/0LZ052GKNX65' 
     },
+
     {
         id: 'project-management',
         title: 'Project Management',
         issuer: 'Dicoding Indonesia',
         date: 'September 2023',
         image: certProjectManagement,
-        verifyLink: 'https://www.dicoding.com/certificates/QLZ9642JMZ5D' // IMPORTANT: Replace
+        verifyLink: 'https://www.dicoding.com/certificates/QLZ9642JMZ5D'
     },
+
     {
         id: 'web-development',
         title: 'Web Development Fundamental',
         issuer: 'Dicoding Indonesia',
         date: 'July 2023',
         image: certCloudComputing,
-        verifyLink: 'https://www.dicoding.com/certificates/NVP7O354WPR0' // IMPORTANT: Replace
+        verifyLink: 'https://www.dicoding.com/certificates/NVP7O354WPR0' 
     },
+
     {
         id: 'data-science-fundamental',
         title: 'Data Science Fundamental',
         issuer: 'Dicoding Indonesia',
         date: 'September 2023',
         image: certFrontendDev,
-        verifyLink: 'https://www.dicoding.com/certificates/2VX3R0J9JZYQ' // IMPORTANT: Replace
+        verifyLink: 'https://www.dicoding.com/certificates/2VX3R0J9JZYQ'
     },
+
 ];
+
+
+const certsToShowInitially = 3; 
 ---
 
 <section id="certificates" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,51 +128,45 @@ export const certificates: Certificate[] = [
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {certificates.map(cert => (
-            <div 
-                class="relative group rounded-xl border-3 border-black shadow-card hover:shadow-hover overflow-hidden cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
-                data-cert-id={cert.id}
-            >
-                <Image 
-                    src={cert.image} 
-                    alt={cert.title} 
-                    widths={[300, 600]}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    loading="lazy"
-                    class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 mix-blend-multiply"
-                />
-                <div class="absolute inset-0 bg-pblack/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4">
-                    <h3 class="text-white text-xl font-bold text-center">{cert.title}</h3>
+        {certificates.map((cert, index) => {
+            const isHidden = index >= certsToShowInitially;
+            return (
+                <div
+                    class:list={[
+                        "relative group rounded-xl border-3 border-black shadow-card hover:shadow-hover overflow-hidden cursor-pointer transition-all duration-300 transform hover:-translate-y-1",
+                        { 'hidden more-cert': isHidden }
+                    ]}
+                    data-cert-id={cert.id}
+                >
+                    <Image
+                        src={cert.image}
+                        alt={cert.title}
+                        widths={[300, 600]}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        loading="lazy"
+                        class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 mix-blend-multiply"
+                    />
+                    <div class="absolute inset-0 bg-pblack/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4">
+                        <h3 class="text-white text-xl font-bold text-center">{cert.title}</h3>
+                    </div>
                 </div>
-            </div>
-        ))}
+            );
+        })}
     </div>
 
-    <div id="cert-modal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 opacity-0 invisible transition-all duration-300 p-4">
-        <div class="bg-white rounded-xl shadow-lg relative w-full max-w-3xl max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300">
-            <button id="close-modal" class="absolute top-4 right-4 text-pblack hover:text-red-600 text-3xl font-bold z-10">&times;</button>
-            <div class="p-6 md:p-8">
-                <img 
-                    id="modal-image" 
-                    src={certificates[0].image.src}
-                    alt="Certificate" 
-                    loading="lazy"
-                    class="w-full h-auto rounded-lg mb-6 border-2 border-pblack/20" 
-                />
-                <h3 id="modal-title" class="text-3xl font-bold text-pblack mb-2"></h3>
-                <p class="text-pblack/80 mb-1"><span class="font-semibold">Issuer:</span> <span id="modal-issuer"></span></p>
-                <p class="text-pblack/80 mb-6"><span class="font-semibold">Issued:</span> <span id="modal-date"></span></p>
-                <a 
-                    id="modal-verify-link" 
-                    href="#" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    class="inline-block bg-pblue text-white font-bold py-3 px-6 rounded-lg border-3 border-black shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1"
-                >
-                    Verify Credential
-                </a>
-            </div>
+    {/* --- 3. ADD LOAD MORE BUTTON --- */}
+    {certificates.length > certsToShowInitially && (
+        <div class="text-center mt-12">
+            <button
+                id="load-more-certs-btn"
+                class="bg-pblue text-lg py-3 px-8 rounded-lg border-3 border-black shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1"
+            >
+                Load More Certificates
+            </button>
         </div>
+    )}
+
+    <div id="cert-modal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 opacity-0 invisible transition-all duration-300 p-4">
     </div>
 </section>
 
@@ -167,46 +181,71 @@ export const certificates: Certificate[] = [
         const modalVerifyLink = document.getElementById('modal-verify-link');
         const certThumbnails = document.querySelectorAll('[data-cert-id]');
 
-        function openModal(certId) {
-            const cert = certificates.find(c => c.id === certId);
-            if (!cert) return;
+        const loadMoreCertsBtn = document.getElementById('load-more-certs-btn');
 
-            modalImage.src = cert.image.src;
-            modalImage.alt = cert.title;
-            modalTitle.textContent = cert.title;
-            modalIssuer.textContent = cert.issuer;
-            modalDate.textContent = cert.date;
-            modalVerifyLink.href = cert.verifyLink;
+        function openModal(certId) { 
+            if (!certId) return;
+            const cert = certificates.find(c => c.id === certId);
+            if (!cert || !certModal || !modalImage || !modalTitle || !modalIssuer || !modalDate || !modalVerifyLink) return;
+
+            if (modalImage instanceof HTMLImageElement) {
+                modalImage.src = cert.image.src;
+                modalImage.alt = cert.title;
+            }
+            if (modalTitle) modalTitle.textContent = cert.title;
+            if (modalIssuer) modalIssuer.textContent = cert.issuer;
+            if (modalDate) modalDate.textContent = cert.date;
+             if (modalVerifyLink instanceof HTMLAnchorElement) {
+                 modalVerifyLink.href = cert.verifyLink;
+             }
+
 
             certModal.classList.remove('invisible', 'opacity-0');
-            certModal.querySelector('div').classList.remove('scale-95');
+            certModal.querySelector('div')?.classList.remove('scale-95');
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
+            if (!certModal) return;
             certModal.classList.add('invisible', 'opacity-0');
-            certModal.querySelector('div').classList.add('scale-95');
+            certModal.querySelector('div')?.classList.add('scale-95');
             document.body.style.overflow = '';
         }
 
         certThumbnails.forEach(thumbnail => {
-            thumbnail.addEventListener('click', () => {
-                openModal(thumbnail.dataset.certId);
+            if (thumbnail instanceof HTMLElement) {
+                 thumbnail.addEventListener('click', () => {
+                    openModal(thumbnail.dataset.certId);
+                 });
+            }
+        });
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
+
+        if (certModal) {
+            certModal.addEventListener('click', (e) => {
+                if (e.target === certModal) {
+                    closeModal();
+                }
             });
-        });
 
-        closeModalBtn.addEventListener('click', closeModal);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !certModal.classList.contains('invisible')) {
+                    closeModal();
+                }
+            });
+        }
 
-        certModal.addEventListener('click', (e) => {
-            if (e.target === certModal) {
-                closeModal();
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !certModal.classList.contains('invisible')) {
-                closeModal();
-            }
-        });
+        if (loadMoreCertsBtn) {
+            loadMoreCertsBtn.addEventListener('click', () => {
+                const hiddenCerts = document.querySelectorAll('.more-cert');
+                hiddenCerts.forEach(cert => {
+                    cert.classList.remove('hidden');
+                });
+                loadMoreCertsBtn.style.display = 'none';
+            });
+        }
     });
 </script>

@@ -7,10 +7,30 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 
 const heroImageModule = await images["/src/assets/hero-removebg-preview.png"]();
 const heroImage = heroImageModule.default;
----   
+--- 
 
-<section class="py-20 flex md:flex-row flex-col px-4 md:px-0 gap-10 md:gap-0">
-  <div class="flex flex-col gap-6 justify-start items-start md:w-1/2">
+<section id="hero-section" class="relative overflow-hidden py-20 flex md:flex-row flex-col px-4 md:px-0 gap-10 md:gap-0">
+
+  <div class="absolute inset-0 z-0 opacity-20 text-pblack hidden md:block" aria-hidden="true">
+    <svg 
+      width="100%" 
+      height="100%" 
+      viewBox="0 0 1000 600" 
+      preserveAspectRatio="xMidYMid slice" 
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M 400 300 C 500 150, 700 450, 850 300"
+        stroke="currentColor"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-dasharray="8 8"
+      ></path>
+    </svg>
+  </div>
+
+  <div class="relative z-10 flex flex-col gap-6 justify-start items-start md:w-1/2">
     <h1 class="text-pblack">Hi, my name is Jason Sebastian.</h1>
     <p class="text-6xl font-bold">Giving structure to a daydream.</p>
     <p>
@@ -26,8 +46,10 @@ const heroImage = heroImageModule.default;
       Let's work together!
     </a>
   </div>
+
   <div
-    class="md:w-1/2 object-contain flex items-center justify-center p-10 group"
+    id="hero-image-card"
+    class="relative z-10 md:w-1/2 object-contain flex items-center justify-center p-10 group"
   >
     <a
       rel="noopener noreferrer"
@@ -64,3 +86,45 @@ const heroImage = heroImageModule.default;
     >
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const section = document.getElementById("hero-section");
+    const imageCard = document.getElementById("hero-image-card");
+
+    if (!section || !imageCard) {
+      console.error("Hero parallax elements not found.");
+      return;
+    }
+
+    function moveElements(e: MouseEvent) {
+      const { clientX, clientY } = e;
+      const x = (clientX - window.innerWidth / 2) * 0.01; 
+      const y = (clientY - window.innerHeight / 2) * 0.01; 
+
+      gsap.to(imageCard, {
+        x: x,
+        y: y,
+        ease: "power1.out",
+        duration: 0.5,
+      });
+    }
+
+    section.addEventListener("mousemove", moveElements);
+  });
+</script>
+
+<style>
+  #hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(#4E6273 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: center;
+    opacity: 0.2;
+    z-index: -1;
+  }
+</style>

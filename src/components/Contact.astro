@@ -1,0 +1,88 @@
+---
+// src/components/Contact.astro
+import { Icon } from "astro-icon/components";
+---
+
+<section id="contact" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="text-center mb-16">
+    <h2 class="text-4xl font-bold">Get in Touch</h2>
+    <p class="text-pblack mt-2">Have an idea, or just want to say hi? Let's build it together.</p>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-16 items-start">
+    
+    <div class="md:w-2/3 w-full">
+      <form 
+        action="https://formspree.io/f/xldorydq" 
+        method="POST"
+        class="bg-[#F8F8F4] p-8 rounded-xl border-3 border-black shadow-card space-y-6"
+      >
+        <div>
+          <label for="name" class="block text-lg font-medium text-pblack mb-2">Your Name</label>
+          <input type="text" name="name" id="name" required class="w-full p-3 bg-white/70 border-2 border-black rounded-lg focus:outline-none focus:border-pblue transition-colors duration-300"/>
+        </div>
+        <div>
+          <label for="email" class="block text-lg font-medium text-pblack mb-2">Your Email</label>
+          <input type="email" name="email" id="email" required class="w-full p-3 bg-white/70 border-2 border-black rounded-lg focus:outline-none focus:border-pblue transition-colors duration-300"/>
+        </div>
+        <div>
+          <label for="message" class="block text-lg font-medium text-pblack mb-2">Your Message</label>
+          <textarea name="message" id="message" rows="5" required class="w-full p-3 bg-white/70 border-2 border-black rounded-lg focus:outline-none focus:border-pblue transition-colors duration-300"></textarea>
+        </div>
+        <div>
+          <button type="submit" class="bg-pblue text-lg py-3 px-8 rounded-lg border-3 border-black shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1">
+            Send Message
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="md:w-1/3 w-full md:mt-10 flex flex-col items-start gap-8">
+      <div> 
+        <h3 class="text-3xl font-bold text-pblack">Let's Connect</h3>
+        <p class="text-pblack/80 mt-4 text-lg">
+          You can also find me on these platforms or download my resume.
+        </p>
+      </div>
+      
+
+      <div class="flex items-center gap-6 text-5xl">
+        <a
+          href="mailto:chemicalconcocter@gmail.com"  
+          class="border-1 p-1 border-black rounded-full bg-pyellow shadow-card hover:shadow-hover transition"
+          aria-label="Send an email"
+        >
+          <Icon name="tabler:mail" />
+        </a>
+        <a
+          href="https://github.com/JasonSebastianLim" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="border-1 p-1 border-black rounded-full bg-pblue shadow-card hover:shadow-hover transition"
+           aria-label="GitHub profile"
+        >
+          <Icon name="github" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/jason-sebastian88/" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="border-1 p-1 border-black rounded-full bg-pgreen shadow-card hover:shadow-hover transition"
+          aria-label="LinkedIn profile"
+        >
+          <Icon name="linkedin" />
+        </a>
+      </div>
+
+      <a
+        href="/Jason-Sebastian-Resume.pdf" 
+        download="Jason-Sebastian-Resume.pdf"
+        class="bg-pyellow text-black font-semibold py-3 px-8 rounded-lg border-3 border-black shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1 inline-flex items-center gap-2" 
+      >
+        My Resume
+        <Icon name="tabler:download" class="w-5 h-5"/> 
+      </a>
+    </div>
+
+  </div>
+</section>

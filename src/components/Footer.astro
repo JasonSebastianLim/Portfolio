@@ -1,12 +1,9 @@
 ---
 const today = new Date();
-import { Icon } from "astro-icon/components";
 ---
 
-<footer
-  class="flex flex-col items-center container mx-auto p-10 text-center gap-10 pb-40"
->
-  <p class="text-center">
+<footer class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-16 text-center text-pblack/70">
+  <p>
     &copy; {today.getFullYear()} #MadewithAstro by Jason Sebastian. Modified from
     <a 
       href="https://astro.build/themes/details/sorollaportfolio/" 
@@ -17,29 +14,4 @@ import { Icon } from "astro-icon/components";
       jramma
     </a>. All rights reserved.
   </p>
-  
-  <div class="flex items-center gap-6 text-5xl">
-    <a
-      href="https://github.com/JasonSebastianLim"
-      target="_blank"
-      class="border-1 p-1 border-black rounded-full bg-pblue shadow-card hover:shadow-hover transition"
-    >
-      <Icon name="github" />
-    </a>
-    <a
-      href="https://www.linkedin.com/in/jason-sebastian88/"
-      target="_blank"
-      class="border-1 p-1 border-black rounded-full bg-pgreen shadow-card hover:shadow-hover transition"
-    >
-      <Icon name="linkedin" />
-    </a>
-  </div>
-
-  <a
-    href="/Jason-Sebastian-Resume.pdf" 
-    download="Jason-Sebastian-Resume.pdf"
-    class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-6 rounded-xl shadow-md flex items-center gap-2 transition duration-200"
-  >
-    My Resume
-  </a>
 </footer>

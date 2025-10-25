@@ -1,0 +1,142 @@
+---
+import { Icon } from "astro-icon/components";
+
+const skillCategories = [
+  {
+    title: "Design & Vision",
+    color: "bg-pblue",
+    skills: [
+      { name: "Figma", icon: "tabler:brand-figma" },
+      { name: "UI/UX Principles", icon: "tabler:artboard" },
+      { name: "Wireframing", icon: "tabler:layout-2" },
+    ],
+  },
+  {
+    title: "Frameworks & Libraries",
+    color: "bg-ppink",
+    skills: [
+      { name: "Astro", icon: "tabler:brand-astro" },
+      { name: "React", icon: "tabler:brand-react" },
+      { name: "Next.js", icon: "tabler:brand-nextjs" },
+      { name: "Tailwind CSS", icon: "tabler:brand-tailwind" },
+      { name: "GSAP", icon: "tabler:plant" },
+    ],
+  },
+  {
+    title: "Foundations",
+    color: "bg-pgreen",
+    skills: [
+      { name: "HTML5", icon: "tabler:brand-html5" },
+      { name: "CSS3", icon: "tabler:brand-css3" },
+      { name: "JavaScript", icon: "tabler:brand-javascript" },
+      { name: "Java", icon: "tabler:coffee" },
+    ],
+  },
+  {
+    title: "Data & Analysis",
+    color: "bg-pyellow",
+    skills: [
+      { name: "Python", icon: "tabler:brand-python" },
+      { name: "MongoDB", icon: "tabler:database" },
+      { name: "Xampp", icon: "tabler:server" },
+      { name: "Tableau", icon: "tabler:chart-bar" },
+    ],
+  },
+];
+---
+
+<section id="skills" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="text-center mb-16">
+    <h2 class="text-4xl font-bold">Tools of the Trade</h2>
+    <p class="text-pblack mt-2">My curated toolkit for building and designing.</p>
+  </div>
+
+  <div id="skill-cabinet" class="overflow-x-auto pb-8 custom-scrollbar">
+    <div id="skill-content" class="flex gap-10">
+      
+      {skillCategories.map((category) => (
+        <div class="flex-shrink-0">
+          <h3 class="text-xl font-bold text-pblack mb-4">{category.title}</h3>
+          
+          <div class="flex gap-4">
+            
+            {category.skills.map((skill) => (
+              <div 
+                class:list={[
+                  "w-36 h-36", 
+                  "p-4",
+                  "border-3 border-black rounded-xl",
+                  "shadow-card",
+                  "flex flex-col items-center justify-center gap-2",
+                  "transition-all duration-300",
+                  "hover:shadow-hover hover:-translate-y-2",
+                  category.color 
+                ]}
+              >
+                <Icon name={skill.icon} class="w-12 h-12" />
+                <p class="font-medium text-center text-sm">{skill.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .custom-scrollbar {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    display: none; 
+  }
+
+  .grabbing {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+  }
+  #skill-cabinet {
+    cursor: grab;
+    cursor: -webkit-grab;
+    user-select: none; 
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cabinet = document.getElementById('skill-cabinet');
+    if (!cabinet) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    cabinet.addEventListener('mousedown', (e) => {
+      isDown = true;
+      cabinet.classList.add('grabbing');
+      startX = e.pageX - cabinet.offsetLeft;
+      scrollLeft = cabinet.scrollLeft;
+    });
+
+    cabinet.addEventListener('mouseleave', () => {
+      isDown = false;
+      cabinet.classList.remove('grabbing');
+    });
+
+    cabinet.addEventListener('mouseup', () => {
+      isDown = false;
+      cabinet.classList.remove('grabbing');
+    });
+
+    cabinet.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - cabinet.offsetLeft;
+      const walk = (x - startX) * 2; // The '* 2' makes it feel faster
+      cabinet.scrollLeft = scrollLeft - walk;
+    });
+  });
+</script>
