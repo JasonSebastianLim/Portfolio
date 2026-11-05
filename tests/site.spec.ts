@@ -159,7 +159,7 @@ test("readable with javascript off", async ({ browser }) => {
 
   await expect(page.locator("h1")).toBeVisible();
   await expect(page.locator("#work h3").first()).toBeVisible();
-  await expect(page.getByRole("link", { name: "jason.js700@gmail.com" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "jasonsebastianwork@gmail.com" })).toBeVisible();
   await context.close();
 });
 

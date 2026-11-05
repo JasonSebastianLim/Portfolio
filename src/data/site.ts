@@ -5,7 +5,7 @@ export const person = {
   name: "Jason Sebastian",
   role: "Designer & developer",
   city: "Jakarta",
-  email: "jason.js700@gmail.com",
+  email: "jasonsebastianwork@gmail.com",
   github: "https://github.com/JasonSebastianLim",
   linkedin: "https://www.linkedin.com/in/jason-sebastian88/",
   resume: "/jason-sebastian-resume.pdf",
@@ -89,9 +89,9 @@ export const catalogue: { title: string; note: string; medium: string; href?: st
     href: "https://github.com/JasonSebastianLim/xsj-billiard-shop",
   },
   {
-    title: "Tweet sentiment",
-    note: "NLP pipeline. Named most innovative project by a Google engineer",
-    medium: "Python, NLTK",
+    title: "BinusMaya sentiment",
+    note: "Sentiment analysis of user feedback on the BinusMaya app",
+    medium: "Python",
   },
   {
     title: "Superstore dashboard",
@@ -171,14 +171,14 @@ export const stages: { name: string; body: string; filter: string }[] = [
 export const provenance: { when: string; what: string; where: string }[] = [
   { when: "Feb 2026 to now", what: "L1 Tech Support for hosting, domains, DNS and SSL. IT Architect on Dewacloud, building client environments. Ninja of the Month in May and June 2026.", where: "Dewaweb" },
   { when: "2024 to now", what: "UI/UX design and front-end for clients, 10+ projects.", where: "Freelance" },
-  { when: "Until Feb 2027", what: "Business Analytics, GPA 3.77.", where: "BINUS University" },
+  { when: "Until Feb 2027", what: "Business Analytics, GPA 3.83.", where: "BINUS University" },
   { when: "2020 to now", what: "Head of Events, youth staff.", where: "Vihara Delapan Jalan Mulia" },
 ];
 
 export const tools: { group: string; items: string }[] = [
   { group: "Design", items: "Figma, UX research, design systems, prototyping" },
   { group: "Front end", items: "Astro, React, Next.js, Flutter, TypeScript" },
-  { group: "Back end", items: "Go, Node, Express, Django, PostgreSQL, Redis, MongoDB, Java" },
+  { group: "Back end", items: "Go, Node, PostgreSQL, Redis, Java" },
   { group: "Infrastructure", items: "Linux, Docker, Caddy, systemd, DNS, cPanel, Dewacloud" },
   { group: "Workflow", items: "Git, GitHub, Playwright, AI coding agents" },
   { group: "Data", items: "Python, SQL, Tableau" },
