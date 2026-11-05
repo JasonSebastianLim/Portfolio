@@ -1,0 +1,291 @@
+---
+import { Image } from "astro:assets";
+import WallLabel from "./WallLabel.astro";
+import { catalogue, hung, paramita, terminal } from "@/data/site";
+import beranda from "@/assets/work/paramita-beranda.webp";
+import meditasi from "@/assets/work/paramita-meditasi.webp";
+import paritta from "@/assets/work/paramita-paritta.webp";
+import idplay from "@/assets/work/idplay.jpeg";
+import studium from "@/assets/work/studium.jpeg";
+import terminalShot from "@/assets/work/terminal.webp";
+
+const triptych = [
+  { src: beranda, alt: "Paramita home screen with the day's verse and tonight's practice" },
+  { src: meditasi, alt: "Paramita meditation screen, a pixel art room with a timer" },
+  { src: paritta, alt: "Paramita reader showing the Karaniya Metta Sutta in Pali" },
+];
+const shots = [
+  { src: idplay, alt: "IDPlay website homepage" },
+  { src: studium, alt: "Studium app interface" },
+];
+---
+
+<section class="room" id="work">
+  <header class="room__head">
+    <span class="room__num">I</span>
+    <h2>On the wall</h2>
+  </header>
+
+  <article class="feature">
+    <div class="triptych rise" tabindex="0" role="group" aria-label="Paramita screens">
+      {triptych.map((s) => (
+        <div class="panel">
+          <Image src={s.src} alt={s.alt} widths={[280, 420, 560]} sizes="(max-width: 760px) 62vw, 20vw" />
+        </div>
+      ))}
+    </div>
+    <WallLabel work={paramita}>
+      <ul class="did">
+        {paramita.did.map((line) => <li>{line}</li>)}
+      </ul>
+      <p class="how"><span class="small-caps">How it's built</span>{paramita.how}</p>
+    </WallLabel>
+  </article>
+
+  <article class="feature feature--flip">
+    <div class="frame rise">
+      <Image
+        src={terminalShot}
+        alt="terminal.ai.id showing a BRPT.JK chart, Indonesian market news, macro data and a watchlist"
+        widths={[640, 1000, 1600]}
+        sizes="(max-width: 1500px) 94vw, 1400px"
+      />
+    </div>
+    <WallLabel work={terminal}>
+      <dl class="mono">
+        {terminal.commands.map(([cmd, what]) => (
+          <div>
+            <dt>{cmd}</dt>
+            <dd>{what}</dd>
+          </div>
+        ))}
+      </dl>
+    </WallLabel>
+  </article>
+
+  <div class="pair">
+    {hung.map((work, i) => (
+      <article class="rise">
+        <div class="frame">
+          <Image src={shots[i].src} alt={shots[i].alt} widths={[480, 800, 1200]} sizes="(max-width: 760px) 90vw, 45vw" />
+        </div>
+        <WallLabel work={work} />
+      </article>
+    ))}
+  </div>
+
+  <div class="catalogue">
+    <h3 class="small-caps">Also in the collection</h3>
+    <ol>
+      {catalogue.map((item, i) => (
+        <li>
+          <span class="no mono">{String(i + 1).padStart(2, "0")}</span>
+          <span class="name">
+            {item.href
+              ? <a href={item.href} rel="noopener noreferrer" target="_blank">{item.title}</a>
+              : item.title}
+          </span>
+          <span class="what">{item.note}</span>
+          <span class="tech">{item.medium}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    margin-bottom: var(--room);
+  }
+
+  /* the terminal is 3:1, in a column it's unreadable, so it gets the whole wall */
+  .feature--flip {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .feature--flip :global(.label) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .feature--flip :global(.label > *) {
+    grid-column: 1;
+  }
+
+  .feature--flip :global(.label > dl) {
+    grid-column: 2;
+    grid-row: 1 / span 6;
+    margin: 0;
+  }
+
+  /* three screens hung like an altarpiece, the wings sit a little back */
+  .triptych {
+    display: grid;
+    grid-template-columns: 1fr 1.14fr 1fr;
+    align-items: center;
+    gap: clamp(0.5rem, 1.2vw, 1rem);
+  }
+
+  .panel,
+  .frame {
+    padding: clamp(6px, 0.7vw, 11px);
+    background: linear-gradient(140deg, #6e4f1a, #c9a658 28%, #8d6b2a 52%, #d7b873 76%, #65481a);
+    box-shadow: 0 26px 40px -24px var(--shadow);
+  }
+
+  .panel :global(img),
+  .frame :global(img) {
+    width: 100%;
+    outline: 1px solid rgb(0 0 0 / 0.5);
+  }
+
+  .did {
+    margin-top: 1rem;
+    border-top: 1px solid var(--hairline);
+    font-size: 0.9375rem;
+  }
+
+  .did li {
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .how {
+    margin-top: 1.25rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+    font-size: 0.9375rem;
+  }
+
+  .how .small-caps {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  dl {
+    margin: 1rem 0 0;
+  }
+
+  dl div {
+    display: grid;
+    grid-template-columns: 7.5em minmax(0, 1fr);
+    gap: 0.75em;
+    padding-block: 0.4em;
+    border-top: 1px solid var(--hairline);
+  }
+
+  dt {
+    color: var(--accent);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  .pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+    margin-bottom: var(--room);
+  }
+
+  .pair article:last-child {
+    margin-top: clamp(2rem, 8vw, 7rem);
+  }
+
+  .pair .frame {
+    margin-bottom: 1.25rem;
+  }
+
+  .catalogue h3 {
+    margin-bottom: 1.25rem;
+  }
+
+  .catalogue li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 0.8fr);
+    gap: 1rem;
+    align-items: baseline;
+    padding-block: 0.9rem;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .no {
+    color: var(--gilt);
+  }
+
+  .name {
+    font: italic 400 1.375rem/1.2 var(--serif);
+  }
+
+  .what {
+    font-size: 0.9375rem;
+  }
+
+  .tech {
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+
+  @media (max-width: 900px) {
+    .feature {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .feature--flip :global(.label) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .feature--flip :global(.label > dl) {
+      grid-column: 1;
+      grid-row: auto;
+      margin-top: 1rem;
+    }
+  }
+
+  @media (max-width: 760px) {
+    /* phones: swipe the panels, the page itself must not scroll sideways */
+    .triptych {
+      grid-template-columns: repeat(3, 62vw);
+      margin-inline: calc(var(--gutter) * -1);
+      padding-inline: var(--gutter);
+      padding-bottom: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: var(--gutter);
+    }
+
+    .panel {
+      scroll-snap-align: start;
+    }
+
+    .pair {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pair article:last-child {
+      margin-top: 0;
+    }
+
+    .catalogue li {
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+      gap: 0.15rem 0.5rem;
+    }
+
+    .what,
+    .tech {
+      grid-column: 2;
+      text-align: left;
+    }
+  }
+</style>

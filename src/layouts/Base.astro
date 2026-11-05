@@ -1,0 +1,81 @@
+---
+import "@/styles/global.css";
+import { meta, person } from "@/data/site";
+import { heroImages } from "@/lib/hero";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = meta.title, description = meta.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const og = new URL("/og.jpg", Astro.site);
+const hero = await heroImages();
+
+const heroCss = `
+:root{--painted:url(${hero.day.wide});--infrared:url(${hero.day.ir})}
+:root[data-theme=night]{--painted:url(${hero.night.wide});--infrared:url(${hero.night.ir})}
+@media (max-width:760px){
+:root{--painted:url(${hero.day.narrow})}
+:root[data-theme=night]{--painted:url(${hero.night.narrow})}
+}`;
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: person.name,
+  jobTitle: person.role,
+  url: Astro.site,
+  sameAs: [person.github, person.linkedin],
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#efe7d8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#120f0b" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preload" href="/fonts/fell-roman.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/fell-italic.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline type="application/ld+json" set:html={jsonLd} />
+
+    <!-- has to run before first paint or night visitors get a flash of plaster -->
+    <script is:inline define:vars={{ day: hero.day, night: hero.night }}>
+      let saved = null;
+      try {
+        saved = localStorage.getItem("theme");
+      } catch {}
+      const theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day");
+      document.documentElement.dataset.theme = theme;
+
+      const set = theme === "night" ? night : day;
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = innerWidth <= 760 ? set.narrow : set.wide;
+      document.head.append(link);
+    </script>
+    <style is:inline set:html={heroCss}></style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

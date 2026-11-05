@@ -1,130 +1,257 @@
 ---
-import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/*.{jpeg,jpg,png,gif}"
-);
+import { credits, person } from "@/data/site";
 
-const heroImageModule = await images["/src/assets/hero-removebg-preview.png"]();
-const heroImage = heroImageModule.default;
---- 
+const [ceiling, stillLife] = credits;
+const notes = [
+  { text: "paramita.app  NS  dewaweb", x: 48, y: 14 },
+  { text: "api  A  vps", x: 70, y: 30 },
+  { text: "caddy  →  web:3000", x: 42, y: 46 },
+  { text: "pg_dump, then migrate", x: 62, y: 62 },
+  { text: "smoke test 23/23", x: 46, y: 78 },
+];
+---
 
-<section id="hero-section" class="relative overflow-hidden py-20 flex md:flex-row flex-col px-4 md:px-0 gap-10 md:gap-0">
+<section class="hero" data-hero>
+  <figure class="canvas" data-canvas aria-hidden="true">
+    <div class="painted"></div>
+    <div class="infrared" data-infrared data-state="drift">
+      {notes.map((n) => <span class="note mono" style={`left:${n.x}%;top:${n.y}%`}>{n.text}</span>)}
+    </div>
+  </figure>
 
-  <div class="absolute inset-0 z-0 opacity-20 text-pblack hidden md:block" aria-hidden="true">
-    <svg 
-      width="100%" 
-      height="100%" 
-      viewBox="0 0 1000 600" 
-      preserveAspectRatio="xMidYMid slice" 
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M 400 300 C 500 150, 700 450, 850 300"
-        stroke="currentColor"
-        fill="none"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-dasharray="8 8"
-      ></path>
-    </svg>
-  </div>
-
-  <div class="relative z-10 flex flex-col gap-6 justify-start items-start md:w-1/2">
-    <h1 class="text-pblack">Hi, my name is Jason Sebastian.</h1>
-    <p class="text-6xl font-bold">Giving structure to a daydream.</p>
-    <p>
-      I'm a web designer and professional daydreamer.
-      I specialize in exploring wild ideas and then focusing them into beautiful, 
-      intuitive designs that perfectly capture a client's vision.
-      My goal is to meet your requirements; my passion is to make the result even better than you imagined.
+  <div class="words">
+    <p class="small-caps">{person.role}, {person.city}</p>
+    <h1>Giving structure to a <em>daydream.</em></h1>
+    <p class="intro">
+      I'm Jason. I design interfaces, build them, then put them on the internet myself, down to the DNS records.
     </p>
-    <a
-      href="/#socials"
-      class="bg-pgreen px-5 py-3 border-1 border-black rounded-lg shadow-card hover:shadow-hover transition"
-    >
-      Let's work together!
-    </a>
+    <p class="links">
+      <a href="#work">See the work</a>
+      <a href="#contact">Let's work together</a>
+    </p>
   </div>
 
-  <div
-    id="hero-image-card"
-    class="relative z-10 md:w-1/2 object-contain flex items-center justify-center p-10 group"
-  >
-    <a
-      rel="noopener noreferrer"
-      href="https://www.linkedin.com/in/jason-sebastian88/"
-      target="_blank"
-    >
-      <div
-        class="bg-pblue border-3 border-black rounded-2xl h-52 w-60 shadow-card group-hover:shadow-hover flex transition relative"
-      >
-        <div
-          class="absolute -top-8 -left-12 text-5xl bg-ppink px-5 py-1 z-10 shadow-card group-hover:shadow-hover transition rounded-t-2xl border-3 border-black rounded-bl-2xl rounded-br-sm"
-        >
-          <Icon name="paint" />
-        </div>
-        <div
-          class="absolute top-16 -right-16 text-5xl bg-pyellow p-2 z-10 shadow-card group-hover:shadow-hover transition rounded-full border-3 border-black"
-        >
-          <Icon name="beach" />
-        </div>
-        <div
-          class="absolute text-nowrap flex items-center gap-4 -bottom-12 right-0 pr-4 bg-pgreen pl-1 z-10 shadow-card1 group-hover:shadow-card transition rounded-full border-3 border-black"
-        >
-          <Icon name="beach" />
-          <p>Jason Sebastian</p>
-        </div>
-        <div class="h-80 w-60 overflow-hidden relative -mt-30 rounded-2xl">
-          <Image
-            class="object-bottom absolute bottom-0 group-hover:scale-105 transition"
-            src={heroImage}
-            alt="Sorolla, photo wiki"
-          />
-        </div>
-      </div></a
-    >
+  <div class="caption">
+    <p>
+      <span class="for-day">{ceiling.work}, {ceiling.detail}</span>
+      <span class="for-night">{stillLife.work}, {stillLife.detail}</span>
+    </p>
+    <button type="button" class="ir-button" data-infrared-toggle aria-pressed="false">Infrared</button>
   </div>
 </section>
 
 <script>
-  import { gsap } from "gsap";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const section = document.getElementById("hero-section");
-    const imageCard = document.getElementById("hero-image-card");
-
-    if (!section || !imageCard) {
-      console.error("Hero parallax elements not found.");
-      return;
-    }
-
-    function moveElements(e: MouseEvent) {
-      const { clientX, clientY } = e;
-      const x = (clientX - window.innerWidth / 2) * 0.01; 
-      const y = (clientY - window.innerHeight / 2) * 0.01; 
-
-      gsap.to(imageCard, {
-        x: x,
-        y: y,
-        ease: "power1.out",
-        duration: 0.5,
-      });
-    }
-
-    section.addEventListener("mousemove", moveElements);
-  });
+  import "@/scripts/lens";
 </script>
 
 <style>
-  #hero-section::before {
-    content: '';
+  @property --lx {
+    syntax: "<length-percentage>";
+    inherits: true;
+    initial-value: 62%;
+  }
+  @property --ly {
+    syntax: "<length-percentage>";
+    inherits: true;
+    initial-value: 40%;
+  }
+  @property --lr {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+  }
+
+  .hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-content: end;
+    min-height: max(100svh, 44rem);
+    padding: 8rem var(--gutter) 2rem;
+    overflow: clip;
+  }
+
+  /* the painting dissolves into bare wall, like a fresco nobody finished */
+  .canvas {
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: -1;
+    width: min(72vw, 78rem);
+    margin: 0;
+    mask-image: linear-gradient(to right, transparent 10%, #000 52%), linear-gradient(to top, transparent, #000 20%);
+    mask-composite: intersect;
+  }
+
+  .painted,
+  .infrared {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(#4E6273 1px, transparent 1px);
-    background-size: 20px 20px;
-    background-position: center;
-    opacity: 0.2;
-    z-index: -1;
+    background-size: cover;
+    background-position: 50% 42%;
+  }
+
+  .painted {
+    background-image: var(--painted);
+  }
+
+  .infrared {
+    --lr: 0px;
+    background-image: var(--infrared);
+    mask-image: radial-gradient(circle var(--lr) at var(--lx) var(--ly), #000 97%, transparent 100%);
+    transition: --lr 0.45s cubic-bezier(0.3, 0, 0.1, 1);
+  }
+
+  .infrared[data-state="lens"] {
+    --lr: clamp(7rem, 15vw, 13rem);
+  }
+
+  .infrared[data-state="full"] {
+    --lr: 150vmax;
+    transition-duration: 0.9s;
+  }
+
+  /* lens wanders once on load so people find it without being told */
+  @media (prefers-reduced-motion: no-preference) {
+    .infrared[data-state="drift"] {
+      animation: drift 11s ease-in-out 1s both;
+    }
+
+    @keyframes drift {
+      0% { --lr: 0px; --lx: 70%; --ly: 26%; }
+      14% { --lr: 11rem; --lx: 66%; --ly: 30%; }
+      55% { --lr: 11rem; --lx: 52%; --ly: 52%; }
+      86% { --lr: 11rem; --lx: 72%; --ly: 66%; }
+      100% { --lr: 0px; --lx: 74%; --ly: 68%; }
+    }
+  }
+
+  .note {
+    position: absolute;
+    translate: -50% -50%;
+    padding: 0.2em 0.6em;
+    white-space: pre;
+    color: #241c13;
+    background: rgb(233 224 207 / 0.9);
+    border-left: 2px solid #a23b1f;
+    font-size: 0.75rem;
+  }
+
+  .words {
+    max-width: min(46rem, 62vw);
+  }
+
+  h1 {
+    margin-block: 1.25rem 1.75rem;
+    max-width: 5.6em;
+    font-size: clamp(3.5rem, 7.8vw, 8rem);
+    line-height: 0.96;
+    letter-spacing: -0.012em;
+  }
+
+  h1 em {
+    color: var(--accent);
+  }
+
+  .intro {
+    max-width: 29rem;
+    font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    margin-top: 2rem;
+    font-weight: 500;
+  }
+
+  .caption {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+  }
+
+  .for-night {
+    display: none;
+  }
+
+  :global(:root[data-theme="night"]) .for-night {
+    display: inline;
+  }
+
+  :global(:root[data-theme="night"]) .for-day {
+    display: none;
+  }
+
+  .ir-button {
+    all: unset;
+    flex: none;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--gilt);
+    font: 400 0.75rem/1 var(--mono);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .ir-button:hover,
+  .ir-button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--wall);
+  }
+
+  .ir-button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 760px) {
+    .hero {
+      min-height: 100svh;
+      padding-top: 60svh;
+    }
+
+    /* starts under the nav, a poppy behind the menu is unreadable */
+    .canvas {
+      inset: 5.5rem 0 auto;
+      width: 100%;
+      height: 58svh;
+      mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 66%, transparent);
+      mask-composite: add;
+    }
+
+    .painted,
+    .infrared {
+      background-position: 50% 30%;
+    }
+
+    .words {
+      max-width: none;
+    }
+
+    .note:nth-child(even) {
+      display: none;
+    }
+
+    .note {
+      left: 50% !important;
+    }
+
+    .caption {
+      justify-content: flex-start;
+      margin-top: 2rem;
+    }
+
+    /* sits on the painting, below the fold you'd press it and see nothing happen */
+    .ir-button {
+      position: absolute;
+      top: calc(5.5rem + 42svh);
+      right: var(--gutter);
+      background: var(--wall);
+    }
   }
 </style>

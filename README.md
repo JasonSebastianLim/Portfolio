@@ -1,120 +1,34 @@
-# 🌐 Personal Portfolio
+# jasonsebastian.netlify.app
 
-Welcome to my personal portfolio demo repository! This project is a demonstration of what a personal portfolio could look like. It showcases various aspects of web development, including my work, skills, and projects.
+My portfolio. Day is a fresco ceiling, night is a Dutch still life, and the Infrared button shows what's underneath.
 
-- You can view the deployed project at the following URL: [https://sorolla.netlify.app/](https://sorolla.netlify.app/)
-- Astro web templates: https://astro.build/themes/details/sorollaportfolio/
-
-## 📂 Project Structure
-
-- **public/**: Contains public assets like images and fonts.
-- **src/**: Includes the source code for the portfolio.
-- **.gitignore**: Specifies files and directories to be ignored by Git.
-- **astro.config.mjs**: Configuration file for Astro.
-- **package.json**: Lists project dependencies and scripts.
-- **tailwind.config.mjs**: Configuration file for Tailwind CSS.
-- **tsconfig.json**: TypeScript configuration file.
-
-
-### 🧭 /src structure
-
-The `/src` directory contains the main source code for the project. Below is an overview of its structure:
+## Running it
 
 ```
-src
-├── assets
-│   ├── adriana.jpg
-│   ├── euro.jpg
-│   ├── fran.jpg
-│   └── hero.png
-├── components
-│   ├── BaseHead.astro
-│   ├── Footer.astro
-│   ├── FormattedDate.astro
-│   ├── Header.astro
-│   ├── HeaderLink.astro
-│   ├── Hero.astro
-│   └── WhatIDo.astro
-├── consts.ts
-├── content
-│   └── blog
-│       └── content in markdown format
-├── content.config.ts
-├── icons
-│   ├── 1.svg
-│   ├── 2.svg
-│   ├── 3.svg
-│   ├── 4.svg
-│   ├── 5.svg
-│   ├── beach.svg
-│   ├── github.svg
-│   ├── linkedin.svg
-│   ├── paint.svg
-│   └── web.svg
-├── layouts
-│   └── BlogPost.astro
-├── pages
-│   ├── about.astro
-│   ├── blog
-│   │   ├── index.astro
-│   │   └── [...slug].astro
-│   ├── index.astro
-│   └── rss.xml.js
-└── styles
-    ├── global.css
-    └── hamburgers.css
+npm ci
+npm run dev
 ```
 
-#### Explanation
+## Changing things
 
-- **assets**: Contains image files used in the project.
-- **components**: Contains reusable UI components built with Astro.
-- **content**: Contains blog content in Markdown format.
-- **content.config.ts**: Configuration file for content collections.
-- **icons**: Contains SVG icon files used in the project.
-- **layouts**: Contains layout components.
-  - `BlogPost.astro`: Layout component for blog posts.
-- **pages**: Contains the main pages of the site.
-  - `blog/index.astro`: Blog index page.
-  - `blog/[...slug].astro`: Dynamic route for individual blog posts.
-- **styles**: Contains global and component-specific CSS files.
-  - `global.css`: Global styles for the project.
-  - `hamburgers.css`: Styles for the hamburger menu.
+All the words are in `src/data/site.ts`. New project, new job, new certificate, that's the only file to touch.
 
-This structure helps in organizing the project files and makes it easier to maintain and scale the project.
+If the hero paintings change, run `npm run infrared` to remake the infrared layers.
 
+The resume is `resume/resume.html`. Edit it, then `npm run resume` to rebuild the PDF.
 
-## 🚀 Getting Started
+## Before pushing
 
-To run this project locally:
+```
+npm run verify
+```
 
-1. **Clone the repository:**
+Type check, build, then the Playwright tests on a desktop and a phone, both themes, including an axe accessibility pass. First time on a machine: `npx playwright install chromium`.
 
-   ```bash
-   git clone https://github.com/jramma/sorollaportfolio.git
-   cd sorollaportfolio
-   ```
+`npm run links` checks every outside link in `dist`. It also runs by itself every Monday on GitHub Actions.
 
-2. **Install dependencies:**
+## Why it's built like this
 
-   ```bash
-   bun install
-   ```
+Static files, no server, no CSS framework, two runtime packages. There's not much here that can break, which is the point. Nothing waits on JavaScript to show content, so if a script dies the page still reads fine.
 
-3. **Start the development server:**
-
-   ```bash
-   bun dev
-   ```
-
-   The application will be available at `http://localhost:4321`.
-
-## 🛠️ Technologies Used
-
-- **Astro**: A modern static site builder.
-- **Tailwind CSS**: A utility-first CSS framework.
-- **TypeScript**: A statically typed programming language.
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+Fonts are self hosted and the lockfile is committed, so a build today matches a build next year.

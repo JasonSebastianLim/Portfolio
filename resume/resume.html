@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jason Sebastian Resume</title>
+    <style>
+      @font-face {
+        font-family: "Fell";
+        src: url("../public/fonts/fell-roman.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Alexandria";
+        src: url("../public/fonts/alexandria-light.woff2") format("woff2");
+        font-weight: 300;
+      }
+      @font-face {
+        font-family: "Alexandria";
+        src: url("../public/fonts/alexandria-regular.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Alexandria";
+        src: url("../public/fonts/alexandria-medium.woff2") format("woff2");
+        font-weight: 500;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      :root {
+        --ink: #241c14;
+        --soft: #5c4e3d;
+        --accent: #9c3519;
+        --rule: #c9bda8;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        padding: 11mm 13mm 9mm;
+        color: var(--ink);
+        font: 400 8.8pt/1.4 "Alexandria", sans-serif;
+        font-variant-ligatures: none;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      strong {
+        font-weight: 500;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 8mm;
+      }
+
+      header > div:first-child {
+        flex: none;
+      }
+
+      h1 {
+        font: 400 27pt/1 "Fell", serif;
+        white-space: nowrap;
+      }
+
+      .role {
+        margin-top: 1mm;
+        font-size: 9.5pt;
+        color: var(--accent);
+      }
+
+      .contact {
+        text-align: right;
+        font-size: 8pt;
+        color: var(--soft);
+      }
+
+      .summary {
+        margin-top: 3mm;
+      }
+
+      .wins {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3mm;
+        margin-top: 3mm;
+        padding-block: 2.2mm;
+        border-block: 0.6pt solid var(--accent);
+      }
+
+      .wins strong {
+        display: block;
+        font-size: 8.6pt;
+        line-height: 1.22;
+        color: var(--accent);
+      }
+
+      .wins span {
+        display: block;
+        margin-top: 0.6mm;
+        font-size: 7.4pt;
+        line-height: 1.28;
+        color: var(--soft);
+      }
+
+      h2 {
+        margin: 3.4mm 0 1.2mm;
+        padding-bottom: 0.6mm;
+        border-bottom: 0.5pt solid var(--rule);
+        font: 500 7.8pt/1.2 "Alexandria", sans-serif;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .item + .item {
+        margin-top: 1.7mm;
+      }
+
+      .line {
+        display: flex;
+        justify-content: space-between;
+        gap: 4mm;
+      }
+
+      .line b {
+        font-weight: 500;
+        font-size: 9pt;
+      }
+
+      .line span {
+        flex: none;
+        font-size: 7.8pt;
+        color: var(--soft);
+      }
+
+      ul {
+        margin-top: 0.4mm;
+        padding-left: 3.2mm;
+      }
+
+      li {
+        padding-left: 0.5mm;
+      }
+
+      li::marker {
+        color: var(--accent);
+      }
+
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7mm;
+      }
+
+      .rows p + p {
+        margin-top: 0.5mm;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Jason Sebastian</h1>
+        <p class="role">Full Stack Developer &amp; UI/UX Designer</p>
+      </div>
+      <div class="contact">
+        <p>Jakarta, Indonesia · +62 821-2828-2889</p>
+        <p>
+          <a href="mailto:jason.js700@gmail.com">jason.js700@gmail.com</a> ·
+          <a href="https://jasonsebastian.netlify.app">jasonsebastian.netlify.app</a>
+        </p>
+        <p>
+          <a href="https://www.linkedin.com/in/jason-sebastian88/">linkedin.com/in/jason-sebastian88</a> ·
+          <a href="https://github.com/JasonSebastianLim">github.com/JasonSebastianLim</a>
+        </p>
+      </div>
+    </header>
+
+    <p class="summary">
+      Developer and designer who takes a product from the first Figma frame to a live server, including domains, DNS, SSL
+      and deployment. IBM-certified full stack developer, working at Dewaweb as L1 Tech Support and as IT Architect on
+      Dewacloud, and building a production mobile app with an AI-assisted workflow where the design, architecture and
+      final review stay with me.
+    </p>
+
+    <div class="wins">
+      <div>
+        <strong>Ninja of the Month, twice</strong>
+        <span>Dewaweb employee award, May and June 2026, within five months of joining</span>
+      </div>
+      <div>
+        <strong>IBM Full Stack Developer</strong>
+        <span>15-course professional specialization, completed Feb 2026</span>
+      </div>
+      <div>
+        <strong>Live production app</strong>
+        <span>Paramita: designed and architected end to end, in Google Play testing</span>
+      </div>
+      <div>
+        <strong>GPA 3.77, innovation award</strong>
+        <span>BINUS University; most innovative project, named by a Google engineer</span>
+      </div>
+    </div>
+
+    <h2>Experience</h2>
+    <div class="item">
+      <div class="line"><b>Dewaweb · L1 Tech Support &amp; Dewacloud IT Architect</b><span>Feb 2026 – Present</span></div>
+      <ul>
+        <li><strong>Named Ninja of the Month in May and June 2026</strong>, back to back, within five months of joining.</li>
+        <li><strong>L1 Tech Support:</strong> troubleshoot domains, DNS records, nameservers, SSL certificates and website deployment across Dewaweb's hosting services.</li>
+        <li><strong>IT Architect, Dewacloud:</strong> build cloud environments around each client's needs; for example, <strong>led the ERP migration for a 3,000-outlet F&amp;B chain</strong>.</li>
+        <li>Work with Docker and public endpoints on Dewacloud; familiar with load balancing concepts.</li>
+      </ul>
+    </div>
+    <div class="item">
+      <div class="line"><b>Freelance · UI/UX Designer &amp; Front-end Developer</b><span>Apr 2024 – Present</span></div>
+      <ul>
+        <li>Designed and delivered <strong>10+ responsive projects</strong> in Figma and built them with React, HTML, CSS and JavaScript.</li>
+        <li>Improved page performance by <strong>20–40%</strong> through optimized front-end code and asset compression.</li>
+        <li>Ran projects from idea to deployment with a <strong>95%+ on-time delivery</strong> rate.</li>
+      </ul>
+    </div>
+
+    <h2>Projects</h2>
+    <div class="item">
+      <div class="line"><b>Paramita · Product Designer &amp; System Architect · paramita.app</b><span>2026 – Present</span></div>
+      <ul>
+        <li>Buddhist practice app and bachelor's thesis project, tested by real users on their own phones; now in Google Play testing.</li>
+        <li><strong>Own the UI/UX, brand and system architecture</strong>: offline-first Flutter app with on-device SQLite, syncing to a Go API on PostgreSQL and Redis.</li>
+        <li><strong>AI-assisted, not vibecoded</strong>: I set the design and architecture, write part of the code and choose the dependencies; AI agents do much of the implementation, and I cross-check it and test on a real device before release.</li>
+        <li>Release flow across staging and production: database backup before every migration, 23 automated smoke tests, automatic rollback.</li>
+      </ul>
+    </div>
+    <div class="item">
+      <div class="line"><b>terminal.ai.id · Indonesian Stock Market Terminal</b><span>2026 – Present</span></div>
+      <ul>
+        <li>Extended the open source OpenTerminal for the Indonesia Stock Exchange: broker summaries, conviction scoring and macro data for <strong>800+ stocks</strong>.</li>
+        <li>Migrated <strong>1.18M rows</strong> of broker history into the app; added a Telegram bot and passkey sign-in.</li>
+        <li>Self-hosted with Docker Compose and Caddy on Dewacloud, on a custom domain.</li>
+      </ul>
+    </div>
+    <div class="item">
+      <div class="line"><b>Other work</b><span>2025</span></div>
+      <ul>
+        <li><strong>Tweet sentiment analysis</strong> (Python, NLTK): classified 1,000+ tweets; named most innovative project by a Google engineer.</li>
+        <li><strong>XSJ Billiard</strong> (Astro, Decap CMS): shop site with a headless CMS. <strong>Superstore dashboard</strong> (Tableau): cohort analysis with LOD expressions.</li>
+      </ul>
+    </div>
+
+    <div class="two">
+      <div>
+        <h2>Skills</h2>
+        <div class="rows">
+          <p><strong>Design:</strong> Figma, UX research, design systems, prototyping</p>
+          <p><strong>Front end:</strong> React, Next.js, Astro, Flutter, TypeScript</p>
+          <p><strong>Back end:</strong> Go, Node.js, Express, Django, PostgreSQL, Redis, MongoDB</p>
+          <p><strong>Infrastructure:</strong> Linux, Docker, Caddy, DNS, SSL, cPanel, Dewacloud</p>
+          <p><strong>Workflow:</strong> Git, GitHub, Playwright, AI-assisted development</p>
+          <p><strong>Data:</strong> Python, SQL, Tableau</p>
+          <p><strong>Languages:</strong> English and Indonesian (fluent), Mandarin (moderate)</p>
+        </div>
+      </div>
+      <div>
+        <h2>Education</h2>
+        <div class="line"><b>BINUS University</b><span>Expected Feb 2027</span></div>
+        <p>S.Kom., Business Analytics, <strong>GPA 3.77/4.0</strong></p>
+        <h2>Certifications</h2>
+        <div class="rows">
+          <p><strong>IBM Full Stack Software Developer</strong>, Coursera, 2026</p>
+          <p><strong>Data Analyst Associate</strong>, DataCamp, 2025</p>
+          <p>Back-End with JavaScript, Cloud &amp; Generative AI with AWS, Dicoding, 2024</p>
+        </div>
+        <h2>Activities</h2>
+        <p><strong>Head of Events</strong>, Vihara Delapan Jalan Mulia Youth Staff, 2020 – Present</p>
+      </div>
+    </div>
+  </body>
+</html>

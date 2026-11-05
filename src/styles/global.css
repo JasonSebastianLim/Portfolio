@@ -1,93 +1,199 @@
-/* The integration's default injected base.css file */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "./tokens.css";
 
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Black.woff2') format('woff2'),
-         url('/fonts/Alexandria-Black.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Bold.woff2') format('woff2'),
-         url('/fonts/Alexandria-Bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-ExtraBold.woff2') format('woff2'),
-         url('/fonts/Alexandria-ExtraBold.woff') format('woff');
-    font-weight: 800;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-ExtraLight.woff2') format('woff2'),
-         url('/fonts/Alexandria-ExtraLight.woff') format('woff');
-    font-weight: 200;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Light.woff2') format('woff2'),
-         url('/fonts/Alexandria-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Medium.woff2') format('woff2'),
-         url('/fonts/Alexandria-Medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Regular.woff2') format('woff2'),
-         url('/fonts/Alexandria-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-SemiBold.woff2') format('woff2'),
-         url('/fonts/Alexandria-SemiBold.woff') format('woff');
-    font-weight: 600;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Alexandria';
-    src: url('/fonts/Alexandria-Thin.woff2') format('woff2'),
-         url('/fonts/Alexandria-Thin.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Kablammo';
-    src: url('/fonts/Kablammo-Regular.woff2') format('woff2'),
-         url('/fonts/Kablammo-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-body {
-    font-family: 'Alexandria', sans-serif;
-    background-color: #f2f2f2;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
+  -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+body {
+  margin: 0;
+  background: var(--wall);
+  color: var(--ink);
+  font: 300 clamp(1rem, 0.96rem + 0.2vw, 1.0625rem) / 1.7 var(--sans);
+  overflow-wrap: break-word;
+}
+
+:root:not([data-theme="night"]) body {
+  font-weight: 400;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+em {
+  font-style: italic;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--gilt);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--wall);
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  background: var(--ink);
+  color: var(--wall);
+}
+
+.skip:focus {
+  top: 1rem;
+}
+
+.small-caps {
+  font: 400 0.75rem/1.4 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.mono {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* one room per section */
+.room {
+  padding: var(--room) var(--gutter);
+  max-width: 96rem;
+  margin-inline: auto;
+}
+
+.room__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: clamp(1rem, 3vw, 2.5rem);
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.room__num {
+  font: italic 400 clamp(1.5rem, 3vw, 2.25rem)/1 var(--serif);
+  color: var(--gilt);
+}
+
+.room__head h2 {
+  font-size: clamp(2.75rem, 7vw, 6rem);
+}
+
+.room__lede {
+  grid-column: 2;
+  max-width: var(--measure);
+  margin-top: 1.25rem;
+  color: var(--ink-soft);
+}
+
+/* wet paint, same mark for anything unfinished */
+.wet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font: 400 0.75rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.wet::before {
+  content: "";
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: currentColor;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .rise {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        translate: 0 1.75rem;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
 }

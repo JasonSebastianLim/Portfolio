@@ -1,64 +1,147 @@
 ---
-import Link from "./HeaderLink.astro";
-import "../styles/hamburgers.css";
+import { person } from "@/data/site";
+
+const nav = [
+  { label: "Work", href: "/#work" },
+  { label: "Infrastructure", href: "/#underpainting" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
+];
 ---
 
-<header>
-  <nav
-    class="flex container mx-auto md:p-10 px-4 py-6 items-center justify-between"
-  >
-    <a class="flex items-center gap-2" href="/">
-      <p class="font-kablamo text-ppink text-4xl md:text-5xl">JS</p>
-      <p class="pt-2 md:text-lg font-semibold flex">
-        <span class="hidden md:block">Jason</span> Sebastian
-      </p>
-    </a>
-    <ul class="items-center md:gap-8 text-nowrap hidden md:flex">
-      <li><Link href="/#about-me" text="About me" style="primary" /></li>
-      <li><Link href="/#projects" text="What I do" style="secondary" /></li>
-      <li><Link href="/#contact" text="My socials" style="tertiary" /></li>
+<header class="top">
+  <a class="mark" href="/" aria-label={`${person.name}, home`}>
+    <svg viewBox="0 0 40 52" width="20" height="26" aria-hidden="true">
+      <path d="M6 4h28M22 4v32c0 13-14 13-16 2" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <span>{person.name}</span>
+  </a>
+
+  <nav aria-label="Main">
+    <ul>
+      {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
     </ul>
-    <div class="md:hidden z-40">
-      <button class="hamburger hamburger--elastic" type="button">
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
-        </span>
-      </button>
-
-      <div id="navigation" class="fixed top-0 left-0 w-full h-full bg-white transform -translate-y-full transition-transform duration-300 ease-in-out">
-        <ul class="flex flex-col items-center justify-center h-full gap-8 text-nowrap">
-          <li><Link href="/#" text="Home" style="primary" /></li>
-          {/* UPDATED LINKS */}
-          <li><Link href="/#about-me" text="About Me" style="secondary" /></li>
-          <li><Link href="/#projects" text="What I Do" style="tertiary" /></li>
-        </ul>
-      </div>
-    </div>
   </nav>
+
+  <button class="switch" type="button" data-theme-switch>
+    <span class="switch__day">Day</span>
+    <span class="switch__dot" aria-hidden="true"></span>
+    <span class="switch__night">Night</span>
+    <span class="hidden-text" data-theme-hint></span>
+  </button>
 </header>
-<script is:inline>
-  function init(){
-    const hamburger = document.querySelector(".hamburger");
-    const menu = document.getElementById("navigation");
-    const mobileLinks = menu.querySelectorAll("a"); // Get all links inside menu
 
-    if (hamburger && menu) {
-      hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("is-active");
-        menu.classList.toggle("-translate-y-full");
-        menu.classList.toggle("translate-y-0");
-      });
+<script>
+  import "@/scripts/theme";
+</script>
 
-      // Close menu when a link is clicked
-      mobileLinks.forEach(link => {
-        link.addEventListener("click", () => {
-          hamburger.classList.remove("is-active");
-          menu.classList.add("-translate-y-full");
-          menu.classList.remove("translate-y-0");
-        });
-      });
+<style>
+  .top {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 1.5rem var(--gutter);
+  }
+
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-self: start;
+    font: 400 1.25rem/1 var(--serif);
+    text-decoration: none;
+  }
+
+  .mark svg {
+    color: var(--gilt);
+  }
+
+  ul {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.875rem;
+  }
+
+  ul a {
+    text-decoration: none;
+    padding-block: 0.5rem;
+  }
+
+  .switch {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    font: 400 0.75rem/1 var(--sans);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  .hidden-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .switch:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .switch__dot {
+    position: relative;
+    width: 2rem;
+    height: 1px;
+    background: var(--gilt);
+  }
+
+  .switch__dot::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--gilt);
+    transition: translate 0.35s cubic-bezier(0.5, 0, 0.2, 1);
+  }
+
+  :global(:root[data-theme="night"]) .switch__dot::after {
+    translate: calc(2rem - 9px) 0;
+  }
+
+  :global(:root:not([data-theme="night"])) .switch__day,
+  :global(:root[data-theme="night"]) .switch__night {
+    color: var(--ink);
+  }
+
+  @media (max-width: 760px) {
+    .top {
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem 1rem;
+      padding-block: 1rem;
+    }
+
+    nav {
+      grid-row: 2;
+      grid-column: 1 / -1;
+    }
+
+    ul {
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.8125rem;
     }
   }
-  init();
-  document.addEventListener("astro:after-swap", init);
-</script>
+</style>

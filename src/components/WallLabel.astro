@@ -1,0 +1,53 @@
+---
+import type { Project } from "@/data/site";
+
+interface Props {
+  work: Project;
+}
+
+const { work } = Astro.props;
+---
+
+<div class="label">
+  {work.wet && <p class="wet">Wet paint, still in progress</p>}
+  <h3>{work.title}{work.year && <span class="year">, {work.year}</span>}</h3>
+  <p class="medium">{work.medium}</p>
+  <p class="note">{work.note}</p>
+  <slot />
+  <p class="links">
+    {work.links.map((link) => <a href={link.href} rel="noopener noreferrer" target="_blank">{link.label}</a>)}
+  </p>
+</div>
+
+<style>
+  .label {
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    background: var(--gesso);
+    box-shadow: 0 1px 0 var(--hairline), 0 14px 24px -18px var(--shadow);
+  }
+
+  h3 {
+    margin-top: 0.5rem;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-style: italic;
+  }
+
+  .year {
+    font-style: normal;
+  }
+
+  .medium {
+    margin: 0.5rem 0 1rem;
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin-top: 1.25rem;
+    font-weight: 500;
+    font-size: 0.9375rem;
+  }
+</style>

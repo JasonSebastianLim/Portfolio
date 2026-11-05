@@ -1,0 +1,31 @@
+---
+import Base from "@/layouts/Base.astro";
+import Header from "@/components/Header.astro";
+---
+
+<Base title="Not found | Jason Sebastian" description="This page isn't here.">
+  <Header />
+  <main id="main" class="gone">
+    <p class="small-caps">404</p>
+    <h1>This one's <em>on loan.</em></h1>
+    <p>Nothing hangs at this address. <a href="/">Back to the gallery</a>.</p>
+  </main>
+</Base>
+
+<style>
+  .gone {
+    display: grid;
+    align-content: center;
+    gap: 1.25rem;
+    min-height: 100svh;
+    padding: 6rem var(--gutter);
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 11vw, 9rem);
+  }
+
+  em {
+    color: var(--accent);
+  }
+</style>

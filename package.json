@@ -1,36 +1,32 @@
 {
-  "name": "demo-portfolio",
+  "name": "jason-portfolio",
   "type": "module",
-  "version": "0.0.1",
+  "version": "2.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "astro preview --port 4321",
+    "check": "astro check",
+    "test": "playwright test",
+    "links": "node scripts/check-links.mjs",
+    "infrared": "node scripts/infrared.mjs",
+    "resume": "node scripts/build-resume.mjs",
+    "verify": "npm run check && npm run build && npm test"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.7",
-    "@astrojs/netlify": "^6.5.11",
-    "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/tailwind": "^5.1.5",
-    "@iconify-json/cib": "^1.2.3",
-    "@iconify-json/devicon": "^1.2.45",
-    "@iconify-json/game-icons": "^1.2.3",
-    "@iconify-json/heroicons": "^1.2.3",
-    "@iconify-json/logos": "^1.2.9",
-    "@iconify-json/simple-icons": "^1.2.53",
-    "@iconify-json/tabler": "^1.2.23",
-    "@tailwindcss/vite": "^4.0.0",
-    "astro": "^5.13.10",
-    "astro-icon": "^1.1.5",
-    "gasp": "^0.0.2",
-    "gsap": "^3.13.0",
-    "hamburgers": "^1.2.1",
-    "tailwindcss": "^3.4.17"
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.5"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16",
-    "sass-embedded": "^1.83.4"
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "pdf-lib": "^1.17.1",
+    "sharp": "^0.35.5",
+    "typescript": "^6.0.3"
   }
 }

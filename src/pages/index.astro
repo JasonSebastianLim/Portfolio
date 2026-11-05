@@ -1,74 +1,22 @@
 ---
-import BaseHead from "@/components/BaseHead.astro";
+import Base from "@/layouts/Base.astro";
 import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import Hero from "@/components/Hero.astro";
-import Projects from "@/components/Projects.astro"; 
-import Loading from "@/components/Loading.astro";
-import Certificates from '@/components/Certificates.astro';
-import AboutMe from "@/components/AboutMe.astro"; 
-import Skills from "@/components/Skills.astro";
+import Work from "@/components/Work.astro";
+import Underpainting from "@/components/Underpainting.astro";
 import Process from "@/components/Process.astro";
+import About from "@/components/About.astro";
 import Contact from "@/components/Contact.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    
-    <style is:inline>
-      #site-content {
-        opacity: 0;
-        transition: opacity 0.5s ease-out;
-      }
-      #site-content.loaded {
-        opacity: 1;
-      }
-    </style>
-  </head>
-  <body class="p-0 m-0 max-w-screen">
-
-    <Loading />
-
-    <div id="site-content">
-      <Header />
-      <main class="container mx-auto md:px-10">
-      <Hero />
-      
-      <section id="about-me">
-        <AboutMe /> 
-      </section>
-      <section id="process">
-        <Process />
-      <section id="Skills">
-        <Skills />
-      </section>
-      <section id="projects">
-        <Projects />
-      </section>
-      <section id="certificates">
-        <Certificates />
-      </section>
-      <section id="contact">
-        <Contact />
-      </section>
-    </main>
-    <section id="socials" >
-      <Footer />
-    </section>
-      
-    </div>
-
-    <script is:inline>
-      window.addEventListener('preloaderDone', function() {
-        const content = document.getElementById('site-content');
-        if (content) {
-          content.classList.add('loaded');
-        }
-      });
-    </script>
-
-  </body>
-</html>
+<Base>
+  <Header />
+  <main id="main">
+    <Hero />
+    <Work />
+    <Underpainting />
+    <Process />
+    <About />
+  </main>
+  <Contact />
+</Base>

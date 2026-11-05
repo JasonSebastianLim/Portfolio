@@ -1,0 +1,70 @@
+@font-face {
+  font-family: "Fell";
+  src: url("/fonts/fell-roman.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fell";
+  src: url("/fonts/fell-italic.woff2") format("woff2");
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  src: url("/fonts/alexandria-light.woff2") format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  src: url("/fonts/alexandria-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Alexandria";
+  src: url("/fonts/alexandria-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plex Mono";
+  src: url("/fonts/plex-mono.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* day = the ceiling. colours sampled off the lemoyne */
+:root {
+  color-scheme: light;
+  --wall: #efe7d8;
+  --wall-deep: #e4d9c5;
+  --gesso: #f8f3e8;
+  --ink: #2a2118;
+  --ink-soft: #5c4e3d;
+  --gilt: #73510f;
+  --accent: #9c3519;
+  --hairline: rgb(42 33 24 / 0.18);
+  --shadow: rgb(58 40 18 / 0.32);
+
+  --serif: "Fell", "Iowan Old Style", Georgia, serif;
+  --sans: "Alexandria", system-ui, sans-serif;
+  --mono: "Plex Mono", ui-monospace, Consolas, monospace;
+
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --room: clamp(5rem, 12vw, 10rem);
+  --measure: 34rem;
+}
+
+/* night = the still life. the wall is the mignon's own black so the painting melts into it */
+:root[data-theme="night"] {
+  color-scheme: dark;
+  --wall: #120f0b;
+  --wall-deep: #1b1711;
+  --gesso: #231d15;
+  --ink: #ede3d1;
+  --ink-soft: #b5a791;
+  --gilt: #cda85f;
+  --accent: #f0623c;
+  --hairline: rgb(237 227 209 / 0.16);
+  --shadow: rgb(0 0 0 / 0.6);
+}

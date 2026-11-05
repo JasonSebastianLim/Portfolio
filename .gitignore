@@ -12,8 +12,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 bun.lockb
-package-lock.json
+
 .vscode/
+test-results/
+playwright-report/
 
 # environment variables
 .env
@@ -27,3 +29,5 @@ package-lock.json
 .netlify/
 
 bun.lock
+# words that must never be on the site, kept out of the public repo
+.private-words
